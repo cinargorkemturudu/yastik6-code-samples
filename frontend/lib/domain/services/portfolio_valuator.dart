@@ -22,7 +22,7 @@ class PortfolioValuator {
       Decimal currentPrice = quote?.bid ?? Decimal.zero;
 
       if (currentPrice <= Decimal.zero) {
-        // [FIXED] Fallback to the last known database price instead of average cost
+        // Fall back to the last known database price instead of the average cost
         currentPrice = holding.asset.currentPrice;
       }
 

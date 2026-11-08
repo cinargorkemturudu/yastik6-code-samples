@@ -13,7 +13,7 @@ enum HistoryFilterType { all, buyOnly, sellOnly }
 
 class UniversalPortfolioMapper {
 
-  // HELPER METHOD: Centralizes the presentation logic for Lot titles
+  // Centralizes the presentation logic for Lot titles
   static String _formatLotTitle(AssetType type, String rawName, String symbol) {
     if (type == AssetType.stock) {
       return symbol;
@@ -24,7 +24,7 @@ class UniversalPortfolioMapper {
     return AppFormatter.cleanAssetCode(symbol);
   }
 
-  // HELPER METHOD: Returns category display names
+  // Returns category display names
   static String _getCategoryName(AssetType type) {
     switch (type) {
       case AssetType.metal: return "Madenler";
@@ -175,7 +175,7 @@ class UniversalPortfolioMapper {
     List<PortfolioDonutItem> donutItems = [];
 
     if (filter == null) {
-      // PORTFOLIO OVERVIEW: group by category
+      // Portfolio overview: group by category
       final Map<AssetType, Decimal> typeValues = {};
       final Map<AssetType, Decimal> typePnls = {};
 
@@ -208,7 +208,7 @@ class UniversalPortfolioMapper {
         );
       });
     } else {
-      // CATEGORY DETAIL: group by asset 
+      // Category detail: group by asset 
       final sortedItems = List<AssetPosition>.from(items)..sort((a, b) => b.currentValue.compareTo(a.currentValue));
 
       donutItems = List.generate(sortedItems.length, (index) {

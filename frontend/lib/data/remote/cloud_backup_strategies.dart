@@ -152,7 +152,7 @@ class ICloudBackupStrategy implements CloudBackupStrategy {
 
       await ICloudStorage.upload(
         containerId: _containerId,
-        filePath: backupFile.path, // Parametre gelen dosya
+        filePath: backupFile.path, // File passed in as a parameter
         destinationRelativePath: cloudFileName,
         onProgress: (stream) {
           stream.listen(

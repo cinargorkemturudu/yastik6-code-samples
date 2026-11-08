@@ -33,7 +33,7 @@ public abstract class BasePriceClient : IPriceProvider
 
     public async Task<List<LatestPriceResponse>> GetMarketOverviewAsync(CancellationToken ct = default)
     {
-        // NOTE: the "if (!IsMarketOpen()) return empty;" block was removed on purpose.
+        // Deliberately no early return when the market is closed.
         // Even when the market is closed we want to poll the latest data at the longer RefreshInterval (e.g. 30 min).
 
         var retryPolicy = Policy

@@ -30,7 +30,7 @@ class LivePriceNotifier extends AsyncNotifier<MarketState> {
 
     final service = ref.read(priceServiceProvider);
 
-    // 1. LOAD THE CACHE SO THE UI CAN DRAW IMMEDIATELY
+    // 1. Load the cache so the UI can draw immediately
     var current = MarketState.initial();
     final cachedQuotes = await service.getCachedAll();
     if (cachedQuotes.isNotEmpty) {
@@ -45,10 +45,10 @@ class LivePriceNotifier extends AsyncNotifier<MarketState> {
       state = AsyncData(current);
     }
 
-    // 2. START THE LIVE DATA LOOP IN THE BACKGROUND
+    // 2. Start the live data loop in the background
     _timer ??= Timer.periodic(const Duration(seconds: 10), (_) => _refresh());
 
-    // 3. MAKE THE FIRST NETWORK REQUEST (continue with cached data if it fails)
+    // 3. Make the first network request (continue with cached data if it fails)
     return _attemptFetch(current);
   }
 

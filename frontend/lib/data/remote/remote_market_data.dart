@@ -31,7 +31,7 @@ class RemoteMarketData {
 
       if (res.statusCode != 200) {
         AppLog.debug('HAM API YANITI: ${res.body}', domain: 'NETWORK');
-        AppLog.insight('api_error'); // [FIXED]
+        AppLog.insight('api_error');
         AppLog.error(
           'HTTP ${res.statusCode} from market API',
           domain: 'NETWORK',
@@ -48,7 +48,7 @@ class RemoteMarketData {
       try {
         decoded = jsonDecode(res.body);
       } on FormatException catch (e, stack) {
-        AppLog.insight('api_parse_error'); // [FIXED]
+        AppLog.insight('api_parse_error');
         AppLog.error(
           'JSON Format Exception from market data',
           domain: 'NETWORK',
@@ -132,7 +132,7 @@ class RemoteMarketData {
       );
 
       if (res.statusCode != 200) {
-        AppLog.insight('api_error'); // [FIXED]
+        AppLog.insight('api_error');
         AppLog.error(
           'HTTP ${res.statusCode} from history API for $assetCode',
           domain: 'NETWORK',
@@ -149,7 +149,7 @@ class RemoteMarketData {
       try {
         decoded = jsonDecode(res.body);
       } on FormatException catch (e, stack) {
-        AppLog.insight('api_parse_error'); // [FIXED]
+        AppLog.insight('api_parse_error');
         AppLog.error(
           'JSON Format Exception from history API',
           domain: 'NETWORK',

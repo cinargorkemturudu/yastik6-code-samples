@@ -51,7 +51,7 @@ class LocalDatabase implements BackupDatabaseFile {
       'Database connection reset manually (Cloud Restore).',
       domain: 'DATABASE',
     );
-    return await database; // Yeniden init edilmesini tetikler
+    return await database; // Triggers re-initialization
   }
 
   Future<Database> _initDatabase() async {
@@ -106,7 +106,7 @@ class LocalDatabase implements BackupDatabaseFile {
         );
 
         if (oldVersion < 2) {
-          // STEP 1: MIGRATE THE ASSETS TABLE
+          // Step 1: migrate the assets table
           await db.execute('''
             CREATE TABLE assets_new (
               ${DbConstants.colId} TEXT PRIMARY KEY, 
@@ -127,7 +127,7 @@ class LocalDatabase implements BackupDatabaseFile {
             'ALTER TABLE assets_new RENAME TO ${DbConstants.tableAssets}',
           );
 
-          // STEP 2: MIGRATE THE TRANSACTIONS TABLE
+          // Step 2: migrate the transactions table
           await db.execute('''
             CREATE TABLE transactions_new (
               ${DbConstants.colId} TEXT PRIMARY KEY, 
@@ -151,7 +151,7 @@ class LocalDatabase implements BackupDatabaseFile {
             'ALTER TABLE transactions_new RENAME TO ${DbConstants.tableTransactions}',
           );
 
-          // STEP 3: MIGRATE THE ALLOCATIONS TABLE
+          // Step 3: migrate the allocations table
           await db.execute('''
             CREATE TABLE allocations_new (
               ${DbConstants.colId} TEXT PRIMARY KEY, 

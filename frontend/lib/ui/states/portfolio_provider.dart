@@ -20,7 +20,7 @@ PortfolioRealizedSummary realized,
 final _dbMasterProvider = FutureProvider<RawDbData>((ref) async {
   final service = ref.watch(portfolioServiceProvider);
 
-  // Fetch independent data in PARALLEL, roughly doubling performance
+  // Fetch the independent data in parallel
   final results = await Future.wait([
     service.getHoldings(),
     service.getAllTransactions(),
@@ -54,7 +54,7 @@ class PortfolioNotifier extends Notifier<PortfolioData> {
 
     final dbAsync = ref.watch(_dbMasterProvider);
 
-    // 1. THE KEY PART: check for an error first!
+    // 1. Check for a failed read first
     if (dbAsync.hasError) {
       AppLog.error('Failed to read from the database: ${dbAsync.error}', domain: 'STATE', error: dbAsync.error);
       // Send the error payload to the UI. The UI can now see errorMessage and draw an error screen instead of loading forever.
